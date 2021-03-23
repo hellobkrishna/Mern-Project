@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const auth = require('../middleware/auth');
 const ToDo = require('../models/todo.model');
+const urlMetadata = require('url-metadata');
 
 router.post("/", async(req,res) => {
     try{
@@ -32,4 +33,14 @@ router.delete("/:id", auth, async(req,res) => {
     const deletedItem = await ToDo.findByIdAndDelete(req.params.id);
     res.json(deletedItem);
 });
+
+
+urlMetadata('http://bit.ly/2ePIrDy').then(
+  function (metadata) { // success handler
+    console.log(metadata)
+  },
+  function (error) { // failure handler
+    console.log(error)
+  })
+
 module.exports = router;
